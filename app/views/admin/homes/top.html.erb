@@ -1,0 +1,26 @@
+
+<%= render 'list' %>
+
+<h1>注文履歴</h1>
+
+<tbody>
+   <%= @orders.each do |orders| %>
+   <tr>
+      <td>
+         <%= link_to admin_order_path(orders.id) do %>
+           <%= "注文詳細画面" %>
+         <% end %>
+      </td>
+      <td><%= orders.customer_id %></td>
+      <td><%= orders.postal_code %></td>
+      <td><%= orders.address %></td>
+      <td><%= orders.customer_name %></td>
+      <td><%= orders.total_price %></td>
+      <td><%= orders.postage %></td>
+      <td><%= orders.payment_method %></td>
+      <td><%= orders.order_status %></td>
+      <td><%= orders.created_at %></td>
+   </tr>
+</tbody>
+<% end %>
+

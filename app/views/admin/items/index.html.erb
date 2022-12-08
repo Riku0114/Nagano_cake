@@ -1,0 +1,29 @@
+<%= render 'admin/homes/list' %>
+
+<div>
+  <%= link_to new_admin_item_path do %>
+    <%= "商品追加" %>
+    <% end %>
+</div>
+
+<h1>商品一覧</h1>
+
+<tbody>
+    <% @items.each do |items| %>
+   <tr>
+       <div>
+          <td>
+              <%= link_to admin_item_path(items.id) do %>
+              <%= image_tag items.image %>
+              <% end %>
+           </td>
+           <td>
+              商品名 <%= items.name %>
+           </td>
+           <td>
+              説明 <%= items.introduction %>
+           </td>
+       </div>
+   </tr>
+   <% end %>
+</tbody>

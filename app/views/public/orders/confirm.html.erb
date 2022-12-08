@@ -1,0 +1,38 @@
+<header>
+   <%= render 'public/homes/list' %>
+</header>
+
+<%= form_for @orders do |f| %>
+
+<%= @orders.payment_method_i18n %>
+
+
+ <% @cart_items.each do |cart_item| %>
+      <div>
+          <%= cart_item.item.with_tax_price %>
+          <%= cart_item.subtotal %>
+          <% @total_price += cart_item.subtotal %>
+      </div>
+  <% end %>
+
+  <% if @total_price != 0 %>
+  <%= @total_price %>
+  <% end %>
+
+<%= @postage %>
+<% @total_price += @postage %>
+<%= @total_price %>
+
+<%= @orders.postal_code %>
+
+<%= @orders.customer_name %>
+
+<%= @orders.address %>
+
+
+  <div>
+    <%= f.submit '注文を確定する' %>
+  </div>
+  
+<% end %>
+

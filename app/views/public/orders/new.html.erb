@@ -1,0 +1,60 @@
+<header>
+   <%= render 'public/homes/list' %>
+</header>
+
+<h2>注文情報入力</h2>
+
+<%= form_with model: @order, url: orders_confirm_path do |f|  %>
+支払方法
+
+<%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+<%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
+
+<%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+<%= f.label :payment_method_transfte, Order.payment_methods_i18n[:transfer]%>
+
+
+お届け先
+
+<%= f.radio_button :select_address, 1 %>
+<%= f.label :ご自身の住所 %>
+<%= current_customer.address_display %>
+
+
+<%= f.radio_button :select_address, 2 %>
+<%= f.select :addresse_id, options_from_collection_for_select(@addresses.all, :id,:address_display) %>
+
+
+<%= f.radio_button :select_address, 3 %>
+<%= f.label :新しい住所 %>
+
+
+<div>
+   郵便番号（ハイフンなし）
+   <%= f.number_field :postal_code %>
+</div>
+<div>
+   住所
+   <%= f.text_field :address %>
+</div>
+<div>
+   宛名
+   <%= f.text_field :customer_name %>
+</div>
+   <%= f.submit '確認画面へ進む' %>
+<% end %>
+
+
+
+
+<!--orders_new new-->
+
+<!--orders_confirm confirm-->
+
+<!--orders_completion completion-->
+
+<!--orders index-->
+
+<!--order create-->
+
+<!--orderid show-->

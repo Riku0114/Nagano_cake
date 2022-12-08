@@ -1,0 +1,42 @@
+<header>
+   <%= render 'public/homes/list' %>
+</header>
+
+<body>
+<div>
+   <% if customer_signed_in? %>
+   <% else %>
+      ようこそNagano Cakeへ！<br>
+      このサイトは、ケーキ販売のECサイトになります。<br>
+      会員でない方も商品の閲覧はできますが、<br>
+      購入には会員登録が必要になります。
+   <% end %>
+</div>
+
+
+<h1>新着商品</h1>
+
+<tbody>
+    <% @items.each do |items| %>
+   <tr>
+       <div>
+          <td>
+              <%= link_to item_path(items.id) do %>
+              <%= image_tag items.image,　width: '80%', height: '80%' %>
+              <% end %>
+           </td>
+           <td>
+               <%= items.name %>
+           </td>
+           <td>
+               <%= items.price %>
+           </td>
+       </div>
+   </tr>
+   <% end %>
+</tbody>
+</body>
+
+<footer>
+
+</footer>

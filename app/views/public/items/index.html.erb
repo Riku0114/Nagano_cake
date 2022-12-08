@@ -1,0 +1,25 @@
+<header>
+   <%= render 'public/homes/list' %>
+</header>
+
+<h1>商品一覧</h1>
+
+<tbody>
+    <% @items.each do |items| %>
+   <tr>
+       <div>
+          <td>
+              <%= link_to item_path(items.id) do %>
+              <%= image_tag items.image,　width: '80%', height: '80%' %>
+              <% end %>
+           </td>
+           <td>
+               <%= items.name %>
+           </td>
+           <td>
+               <%= items.price %>
+           </td>
+       </div>
+   </tr>
+   <% end %>
+</tbody>

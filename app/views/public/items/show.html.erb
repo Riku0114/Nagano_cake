@@ -1,0 +1,15 @@
+<header>
+   <%= render 'public/homes/list' %>
+</header>
+
+<div>
+   <%= image_tag @item.image,　width: '80%', height: '80%' %>
+   <%= @item.name %>
+   <%= @item.introduction %>
+   <%= @item.price %>（税込）
+   <%= form_with model: @cart_item, url: cart_items_path do |f| %>
+    <%= f.hidden_field :item_id, :value => @item.id %>
+    <%= f.select :amount, [['１',1], ['２',2], ['３',3], ['４',4], ['５',5], ['６',6], ['７',7], ['８',8], ['９',9], ['１０',10]] %>
+    <%= f.submit '追加' %>
+    <% end %>
+</div>

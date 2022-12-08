@@ -1,0 +1,48 @@
+<header>
+   <%= render 'public/homes/list' %>
+</header>
+
+<h2>配送先登録/一覧</h2>
+
+   <%= form_with model: @addresse, url: addresses_path do |f| %>
+<div>
+   郵便番号（ハイフンなし）
+   <%= f.number_field :postal_code %>
+</div>
+<div>
+   住所
+   <%= f.text_field :address %>
+</div>
+<div>
+   宛名
+   <%= f.text_field :name %>
+</div>
+   <%= f.submit '新規登録' %>
+<% end %>
+
+
+<% @addresses.each do |addresses| %>
+<div>
+   郵便番号（ハイフンなし）
+   <%= addresses.postal_code %>
+</div>
+<div>
+   住所
+   <%= addresses.address %>
+</div>
+<div>
+   宛名
+   <%= addresses.name %>
+</div>
+<div>
+   <%= link_to "編集する" ,edit_addresse_path(addresses.id) %>
+   <%= link_to "削除する" ,addresse_path(addresses.id), method: :delete %>
+</div>
+<% end %>
+
+
+<!--addresses_path create-->
+
+<!--edit_addresse:id edit-->
+
+<!--addresse_path:id derete-->

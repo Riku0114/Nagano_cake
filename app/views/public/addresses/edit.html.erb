@@ -1,0 +1,25 @@
+<header>
+   <%= render 'public/homes/list' %>
+</header>
+
+<h2>配送先編集</h2>
+
+   <%= form_with model: @addresses, url: addresse_path(@addresses.id) do |f| %>
+<div>
+   郵便番号（ハイフンなし）
+   <%= f.number_field :postal_code %>
+</div>
+<div>
+   住所
+   <%= f.text_field :address %>
+</div>
+<div>
+   宛名
+   <%= f.text_field :name %>
+</div>
+   <%= f.submit '変更内容を保存' %>
+<% end %>
+
+
+
+ <!--addresse update-->

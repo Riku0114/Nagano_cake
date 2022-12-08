@@ -1,0 +1,46 @@
+<h1>商品編集</h1>
+
+<tbody>
+   <%= form_with model: @item, url: admin_item_path do |f| %>
+   <tr>
+      <div>
+         <td>
+            画像 <%= f.file_field :image, accept: "image/*" %>
+         </td>
+      </div>
+      <div>
+         <td>
+            名前<%= f.text_field :name %>
+         </td>
+      </div>
+      <div>
+         <td>
+            説明文<%= f.text_area :introduction %>
+         </td>
+      </div>
+      <div>
+         <td>
+            税抜価格<%= f.number_field :price %>
+         </td>
+      </div>
+      <div>
+         <td>
+            ジャンル<%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
+         </td>
+      </div>
+      <div>
+         <td>
+            商品状態<%= f.select :is_active ,[['販売中',true],['売切れ',false]] %>
+         <td>
+      </div>
+      <td>
+         <%= f.submit'新規追加' %>
+      </td>
+      <div>
+         <td>
+            <%= link_to "戻る", admin_items_path %>
+         </td>
+      </div>
+   </tr>
+   <% end %>
+</tbody>

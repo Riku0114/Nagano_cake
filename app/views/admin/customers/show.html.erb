@@ -1,0 +1,65 @@
+
+<h1>顧客詳細</h1>
+
+<tbody>
+   <tr>
+       <div>
+           <td>
+              <%= "姓カナ" %>
+              <%= @customer.last_name_kana %>
+           </td>
+       </div>
+       <div>
+           <td>
+              <%= "姓" %>
+              <%= @customer.last_name %>
+           </td>
+       </div>
+       <div>
+           <td>
+              <%= "名カナ" %>
+              <%= @customer.first_name_kana %>
+           </td>
+       </div>
+       <div>
+           <td>
+              <%= "名" %>
+              <%= @customer.first_name %>
+           </td>
+       </div>
+       <div>
+           <td>
+              <%= "メールアドレス" %>
+              <%= @customer.email %>
+           </td>
+       </div>
+       <div>
+           <td>
+              <%= "郵便番号" %>
+              <%= @customer.postal_code %>
+           </td>
+       </div>
+       <div>
+           <td>
+              <%= "住所" %>
+              <%= @customer.address %>
+           </td>
+       </div>
+       <div>
+           <td>
+              <%= "電話番号" %>
+              <%= @customer.telephone_number %>
+           </td>
+       </div>
+       <div>
+           <td>
+              <%= "退会ステータス" %>
+              <%= @customer.is_deleted %>
+           </td>
+       </div>
+           <td>
+              <%= link_to "編集", edit_admin_customer_path(@customer.id) %>
+           </td>
+       </div>
+   </tr>
+</tbody>

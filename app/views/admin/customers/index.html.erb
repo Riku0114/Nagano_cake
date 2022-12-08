@@ -1,0 +1,38 @@
+<%= render 'admin/homes/list' %>
+
+<h1>会員一覧</h1>
+
+<tbody>
+    <% @customers.each do |customers| %>
+   <tr>
+       <div>
+           <td>
+              <%= "姓カナ" %>
+              <%= customers.last_name_kana %>
+           </td>
+       </div>
+       <div>
+           <td>
+              <%= "姓" %>
+              <%= customers.last_name %>
+           </td>
+       </div>
+       <div>
+           <td>
+              <%= "名カナ" %>
+              <%= customers.first_name_kana %>
+           </td>
+       </div>
+       <div>
+           <td>
+              <%= "名" %>
+              <%= customers.first_name %>
+           </td>
+       </div>
+           <td>
+              <%= link_to "会員詳細", admin_customer_path(customers.id) %>
+           </td>
+       </div>
+   </tr>
+   <% end %>
+</tbody>
