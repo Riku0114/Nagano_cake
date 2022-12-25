@@ -1,26 +1,19 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class = "container">
+    <div class = "row">
+        <h2 class = "col-md-12">管理者ログイン</h2>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "admin/shared/links" %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class = "container">
+    <div class = "row">
+      <h4 class = "col-md-12 mt-5  text-center">メールアドレス</h4>
+      <div class = "col-md-12 mt-5 text-center"><%= f.email_field :email, autofocus: true, autocomplete: "email" %></div>
+      <h4 class = "col-md-12 mt-5  text-center">パスワード</h4>
+      <div class = "col-md-12 mt-5 text-center"><%= f.password_field :password, autocomplete: "current-password" %></div>
+      <div class = "col-md-12 text-center">
+        <div class = "mt-5">
+          <%= f.submit "ログイン" %>
+          <% end %>
+        </div>
+    </div>
+  </div>

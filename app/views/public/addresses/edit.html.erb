@@ -1,25 +1,19 @@
-<header>
-   <%= render 'public/homes/list' %>
-</header>
-
-<h2>配送先編集</h2>
-
-   <%= form_with model: @addresses, url: addresse_path(@addresses.id) do |f| %>
-<div>
-   郵便番号（ハイフンなし）
-   <%= f.number_field :postal_code %>
+<div class = "container">
+      <div class = "row">
+        <div class = "col-md-12">
+          <div class = "m-5"></div>
+            <h2>配送先編集</h2>
+          </div>
+        <%= form_with model: @addresses, url: addresse_path(@addresses.id) do |f| %>
+        <div class = "row">
+        <div class = "col-md-4 mt-3">郵便番号（ハイフンなし）</div>
+        <div class = "col-md-8 mt-3"><%= f.text_field :postal_code %></div>
+        <div class = "col-md-4 mt-3">住所</div>
+        <div class = "col-md-8 mt-3"><%= f.text_field :address, :size=>"76"  %></div>
+        <div class = "col-md-4 mt-3">宛名</div>
+        <div class = "col-md-4 mt-3"><%= f.text_field :name %></div>
+        <div class = "col-md-4 mt-3"><%= f.submit '変更内容を保存' %></div>
+        <% end %>
+     </div>
+  </div>
 </div>
-<div>
-   住所
-   <%= f.text_field :address %>
-</div>
-<div>
-   宛名
-   <%= f.text_field :name %>
-</div>
-   <%= f.submit '変更内容を保存' %>
-<% end %>
-
-
-
- <!--addresse update-->

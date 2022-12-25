@@ -1,6 +1,8 @@
 class Admin::HomesController < ApplicationController
+  before_action :authenticate_admin!, only: [:top]
+  
   def top
-    @admin = current_admin
-    @orders = Order.all
+    @orders = Order.page(params[:page])
   end
+
 end

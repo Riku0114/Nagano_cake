@@ -1,38 +1,32 @@
-<%= render 'admin/homes/list' %>
-
-<h1>会員一覧</h1>
-
-<tbody>
-    <% @customers.each do |customers| %>
-   <tr>
-       <div>
-           <td>
-              <%= "姓カナ" %>
-              <%= customers.last_name_kana %>
-           </td>
-       </div>
-       <div>
-           <td>
-              <%= "姓" %>
-              <%= customers.last_name %>
-           </td>
-       </div>
-       <div>
-           <td>
-              <%= "名カナ" %>
-              <%= customers.first_name_kana %>
-           </td>
-       </div>
-       <div>
-           <td>
-              <%= "名" %>
-              <%= customers.first_name %>
-           </td>
-       </div>
-           <td>
-              <%= link_to "会員詳細", admin_customer_path(customers.id) %>
-           </td>
-       </div>
-   </tr>
-   <% end %>
-</tbody>
+<div class = "container">
+      <div class = "row">
+         <p class = "col-md-12 h3">会員一覧</p>
+         <table class="table table-bordered mt-5">
+            <thead>
+               <tr>
+                  <th class="col-md-2">会員ID</th>
+                  <th class="col-md-3">氏名</th>
+                  <th class="col-md-4">メールアドレス</th>
+                  <th class="col-md-３">ステータス</th>
+               </tr>
+            </thead>
+            <tbody>
+               <% @customers.each do |customers| %>
+               <tr>
+                  <td class = "pt-3 h4 text-center"><%= customers.id %></td>
+                  <td class = "pt-3 h4 text-center"><%= link_to customers.last_name + customers.first_name, admin_customer_path(customers.id) %></td>
+                  <td class = "pt-3 h4 text-center"><%= customers.email %></td>
+                  <td class = "pt-3 h4 text-center">
+                     <% if customers.is_deleted == false %>
+                       有効
+                     <% else customers.is_deleted == true %>
+                       退会
+                     <% end %>
+                  </td>
+               </tr>
+               <% end %>
+            </tbody>
+         </table>
+         <div class = "col-md-12 mt-5 h4 text-center"><%= paginate @customers %></div>
+      </div>
+   </div>

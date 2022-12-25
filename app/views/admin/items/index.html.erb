@@ -1,29 +1,41 @@
-<%= render 'admin/homes/list' %>
-
-<div>
-  <%= link_to new_admin_item_path do %>
-    <%= "商品追加" %>
-    <% end %>
-</div>
-
-<h1>商品一覧</h1>
-
-<tbody>
-    <% @items.each do |items| %>
-   <tr>
-       <div>
-          <td>
-              <%= link_to admin_item_path(items.id) do %>
-              <%= image_tag items.image %>
-              <% end %>
-           </td>
-           <td>
-              商品名 <%= items.name %>
-           </td>
-           <td>
-              説明 <%= items.introduction %>
-           </td>
-       </div>
-   </tr>
-   <% end %>
-</tbody>
+<body>
+   <div class = "container">
+      <div class = "row">
+         <p class = "col-md-8 h3">商品一覧</p>
+         <p class = "col-md-4 h5"><%= link_to "商品追加", new_admin_item_path  %></p>
+         <table class="table table-bordered mt-5">
+            <thead>
+               <tr>
+                  <th class="col-md-2">商品ID</th>
+                  <th class="col-md-4">商品名</th>
+                  <th class="col-md-2">税抜価格</th>
+                  <th class="col-md-2">ジャンル</th>
+                  <th class="col-md-2">ステータス</th>
+               </tr>
+            </thead>
+            <tbody>
+               <% @items.each do |items| %>
+               <tr>
+                  <td class = "pt-3 h4 text-center"><%= items.id %></td>
+                  <td>
+                     <%= link_to admin_item_path(items.id) do %>
+                     <%= items.name %>
+                     <% end %>
+                  </td>
+                  <td class = "pt-3 h4 text-center"><%= items.price %></td>
+                  <td class = "pt-3 h4 text-center"><%= items.genre.name %></td>
+                  <td class = "pt-3 h4 text-center">
+                     <% if items.is_active == true %>
+                        販売中
+                     <% else items.is_active == false %>
+                        販売停止中
+                     <% end %>
+                  </td>
+               </tr>
+               <% end %>
+            </tbody>
+         </table>
+         <div class = "col-md-12 mt-5 h4 text-center"><%= paginate @items %></div>
+      </div>
+   </div>
+</body>

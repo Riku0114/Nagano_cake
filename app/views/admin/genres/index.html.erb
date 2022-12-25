@@ -1,31 +1,31 @@
-
-<%= render 'admin/homes/list' %>
-
-<tbody>
-   <%= form_with model: @genre, url: admin_genres_path do |f| %>
-   <tr>
-      <div>
-         <h3>New Genre</h3>
-      </div>
-      <td>
-         <%= f.label :name %>
-      </td>
-      <td>
-         <%= f.text_field :name %>
-      </td>
-      <td>
-         <%= f.submit'Create Genre' %>
-      </td>
-   </tr>
-   <% end %>
-</tbody>
-
-<tbody>
-   <% @genres.each do |genres| %>
-   <tr>
-      <td>
-         <h4><%= link_to genres.name, edit_admin_genre_path(genres.id) %></h4>
-      </td>
-   </tr>
-   <% end %>
-</tbody>
+<div class = "container">
+        <div class = "col-md-12">
+          <div class = "m-5"></div>
+            <h2>ジャンル一覧・追加</h2>
+            </div>
+        <%= form_with model: @genre, url: admin_genres_path do |f| %>
+        <div class = "row">
+        <div class = "col-md-2 mt-5">ジャンル名</div>
+        <div class = "col-md-3 mt-5"><%= f.text_field :name %></div>
+        <div class = "col-md-7 mt-5"><%= f.submit'新規登録' %></div>
+        <% end %>
+     </div>
+     <div class = "row">
+        <table class="table table-bordered mt-5">
+            <thead>
+               <tr>
+                  <th class="col-4">ジャンル</th>
+                  <th class="col-8"></th>
+               </tr>
+            </thead>
+            <tbody>
+               <% @genres.each do |genres| %>
+               <tr>
+                  <td class = "pt-3 h4 text-center"><%= genres.name %></td>
+                  <td class = "pt-3 h4 text-center"><%= link_to "編集する", edit_admin_genre_path(genres.id) %></td>
+               </tr>
+               <% end %>
+            </tbody>
+         </table>
+  </div>
+</div>

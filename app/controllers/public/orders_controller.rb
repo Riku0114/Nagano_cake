@@ -28,17 +28,30 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    @cart_items = current_customer.cart_items
-    @order.total_price = params[:order][:total_price]
     @order.customer_id = current_customer.id
     @order.save
+    @cart_items = current_customer.cart_items.all
+    @cart_items.each do |cart_items|
+      @order_items = OrderItem.new
+      @order_items.order_id = @order.id
+      @order_items.item_id = cart_items.item_id
+      @order_items.purchase_price = cart_items.item.price
+      @order_items.quantity = cart_items.amount
+      @order_items.save
+    end
+    current_customer.cart_items.destroy_all
     redirect_to orders_completion_path
   end
 
   def index
+    @order = current_customer.orders
   end
 
   def show
+    @order = Order.find(params[:id])
+    @order_items = @order.order_items
+    @total_price = 0
+    @postage = 800
   end
 
   private

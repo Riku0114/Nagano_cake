@@ -1,4 +1,6 @@
 class Admin::GenresController < ApplicationController
+  before_action :authenticate_admin!, only: [:index,:edit]
+  
   def index
     @genre = Genre.new
     @genres = Genre.all
@@ -7,6 +9,7 @@ class Admin::GenresController < ApplicationController
   def create
     @genre = Genre.new(genre_params)
     @genre.save
+    flash[:notice] = "登録しました"
     redirect_to admin_genres_path
   end
 
@@ -17,6 +20,7 @@ class Admin::GenresController < ApplicationController
   def update
     @genre = Genre.find(params[:id])
     @genre.update(genre_params)
+    flash[:notice] = "更新しました"
     redirect_to admin_genres_path
   end
   

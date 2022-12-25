@@ -1,16 +1,71 @@
-<h1>注文詳細画面</h1>
-
-<tbody>
-   <tr>
-       <div>
-           <td>
-              <%= "" %>
-              <%= @order. %>
-           </td>
-       </div>
-           <td>
-              <%= link_to "",  %>
-           </td>
-       </div>
-   </tr>
-</tbody>
+<div class = "container">
+      <div class = "row">
+        <div class = "col-md-12">
+          <div class = "m-5"></div>
+            <h2>注文履歴詳細</h2>
+          </div>
+        </div>
+        <div class = "row">
+        <div class = "col-md-4 mt-3">購入者</div>
+        <div class = "col-md-8 mt-3"><%= @order.customer.last_name + @order.customer.first_name %></div>
+        <div class = "col-md-4 mt-3">注文日</div>
+        <div class = "col-md-8 mt-3"><%= @order.created_at.strftime("%Y-%m-%d" ) %></div>
+        <div class = "col-md-4 mt-3">配送先</div>
+        <div class = "col-md-8 mt-3">
+           <%= "〒" + @order.postal_code + @order.address %><br>
+           <%= @order.customer.last_name + @order.customer.first_name %>
+        </div>
+        <div class = "col-md-4 mt-3">支払方法</div>
+        <div class = "col-md-8 mt-3"><%= @order.payment_method_i18n %></div>
+        <div class = "col-md-4 mt-3">注文ステータス</div>
+        <div class = "col-md-8 mt-3">
+           <%= form_with model: @order, url: admin_order_path(@order.id) do |f|  %>
+           <%= f.select :order_status, Order.order_statuses.keys.map {|k| [I18n.t("enums.order.order_status.#{k}"), k]} %>
+           <%= f.submit '更新' %>
+           <% end %>
+        </div>
+        </div>
+        <div class = "row">
+           <table class="col-md-12 table table-bordered mt-5">
+            <thead>
+               <tr>
+                  <th class="col-md-3">商品名</th>
+                  <th class="col-md-2">単価（税込）</th>
+                  <th class="col-md-1">数量</th>
+                  <th class="col-md-2">小計</th>
+                  <th class="col-md-2">製作ステータス</th>
+                  <th class="col-md-2"></th>
+               </tr>
+            </thead>
+            <tbody>
+                <% @order_items.each do |order_items| %>
+               <tr>
+                  <td class = "pt-3 h4 text-center"><%= order_items.item.name %></td>
+                  <td class = "pt-3 h4 text-center"><%= order_items.with_tax_price %></td>
+                  <td class = "pt-3 h4 text-center"><%= order_items.quantity %></td>
+                  <td class = "pt-3 h4 text-center"><%= order_items.with_tax_price * order_items.quantity %></td>
+                  <%= form_with model: order_items, url: admin_order_item_path(order_items.id) do |f|  %>
+                  <td class = "pt-3 h4 text-center"><%= f.select :production_status, OrderItem.production_statuses.keys.map {|k| [I18n.t("enums.order_item.production_status.#{k}"), k]} %></td>
+                  <td class = "pt-3 h4 text-center"><%= f.submit '更新' %></td>
+                  <% end %>
+                  <% @total_price += order_items.with_tax_price * order_items.quantity %>
+               </tr>
+               <% end %>
+            </tbody>
+         </table>
+         <div class="col-md-12">
+            <div class = "row">
+               <div class="col-md-6 h4">商品合計</div>
+               <div class="col-md-6 h4"><%= @total_price %></div>
+            </div>
+            <div class = "row">
+               <div class="col-md-6 h4">送料</div>
+               <div class="col-md-6 h4"><%= @postage %></div>
+            </div>
+            <div class = "row">
+               <div class="col-md-6 h4">請求金額合計</div>
+               <div class="col-md-6 h4"><%= @total_price += @postage %></div>
+            </div>
+         </div>
+        </div>
+      </div>

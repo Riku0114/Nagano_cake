@@ -1,20 +1,14 @@
-<h1>test</h1>
-
-<div>
-   <%= form_with model: @genre, url: admin_genre_path do |f| %>
-   <div>
-      <%= f.label :name %>
-   </div>
-   <div>
-      <%= f.text_field :name %>
-   </div>
-   <div>
-      <%= f.submit 'Update Genre' %>
-   </div>
-   <% end %>
-   <div>
-      <%= link_to "Back", admin_genres_path %>
-   </div>
+<div class = "container">
+        <div class = "col-md-12">
+          <div class = "m-5"></div>
+            <h2>ジャンル編集</h2>
+            </div>
+        <%= form_with model: @genre, url: admin_genre_path do |f| %>
+        <div class = "row">
+        <div class = "col-md-2 mt-5">ジャンル名</div>
+        <div class = "col-md-3 mt-5"><%= f.text_field :name %></div>
+        <div class = "col-md-7 mt-5"><%= f.submit'変更を保存' %></div>
+        <% end %>
+     </div>
 </div>
-
 

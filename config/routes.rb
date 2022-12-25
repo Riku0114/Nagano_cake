@@ -13,11 +13,11 @@ Rails.application.routes.draw do
     delete 'cart_items/erase_all' =>   "cart_items#erase"
     resources :cart_items,only:[:index,:create,:destroy,:update]
 
+    patch  'customers/withdraw'
     get    'customers/mypage' =>       "customers#show"
     get    'customers/edit'
     patch  'customers' =>              "customers#update"
     get    'customers/unsubscribe'
-    patch  'customers/withdraw'
 
     resources :items,only:[:index,:show]
 

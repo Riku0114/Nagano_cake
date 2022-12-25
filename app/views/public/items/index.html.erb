@@ -1,25 +1,21 @@
-<header>
-   <%= render 'public/homes/list' %>
-</header>
-
-<h1>商品一覧</h1>
-
-<tbody>
-    <% @items.each do |items| %>
-   <tr>
-       <div>
-          <td>
-              <%= link_to item_path(items.id) do %>
-              <%= image_tag items.image,　width: '80%', height: '80%' %>
-              <% end %>
-           </td>
-           <td>
-               <%= items.name %>
-           </td>
-           <td>
-               <%= items.price %>
-           </td>
-       </div>
-   </tr>
-   <% end %>
-</tbody>
+<body>
+   <div class = "container">
+      <div class = "row">
+         <h1 class = "col-md-12" >商品一覧</h1>
+      </div>
+   </div>
+   <div class = "container">
+      <div class = "row">
+         <% @items.each do |items| %>
+         <div class = "col-md-3 mt-5" >
+            <%= link_to item_path(items.id) do %>
+            <%= image_tag items.image, size: '250x200' %>
+            <% end %>
+            <div class = "mt-2" ><%= items.name %></div>
+            <div class = "mt-2" >¥<%= items.price %></div>
+         </div>
+         <% end %>
+         <%= paginate @items %>
+      </div>
+   </div>
+</body>

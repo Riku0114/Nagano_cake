@@ -1,6 +1,8 @@
 class Admin::ItemsController < ApplicationController
+  before_action :authenticate_admin!, only: [:index,:show,:edit,:new]
+  
   def index
-    @items = Item.all
+    @items = Item.page(params[:page]).per(8)
   end
 
   def new
@@ -11,6 +13,7 @@ class Admin::ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.save
+    flash[:notice] = "登録しました"
     redirect_to admin_items_path
   end
 
@@ -25,6 +28,7 @@ class Admin::ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     @item.update(item_params)
+    flash[:notice] = "更新しました"
     redirect_to admin_items_path
   end
 

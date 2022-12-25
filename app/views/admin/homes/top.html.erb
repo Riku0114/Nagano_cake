@@ -1,26 +1,26 @@
-
-<%= render 'list' %>
-
-<h1>注文履歴</h1>
-
-<tbody>
-   <%= @orders.each do |orders| %>
-   <tr>
-      <td>
-         <%= link_to admin_order_path(orders.id) do %>
-           <%= "注文詳細画面" %>
-         <% end %>
-      </td>
-      <td><%= orders.customer_id %></td>
-      <td><%= orders.postal_code %></td>
-      <td><%= orders.address %></td>
-      <td><%= orders.customer_name %></td>
-      <td><%= orders.total_price %></td>
-      <td><%= orders.postage %></td>
-      <td><%= orders.payment_method %></td>
-      <td><%= orders.order_status %></td>
-      <td><%= orders.created_at %></td>
-   </tr>
-</tbody>
-<% end %>
-
+<div class = "container">
+      <div class = "row">
+         <p class = "col-md-12 h3">注文履歴一覧</p>
+         <table class="table table-bordered mt-5">
+            <thead>
+               <tr>
+                  <th class="col-md-3">購入日時</th>
+                  <th class="col-md-3">購入者</th>
+                  <th class="col-md-3">注文個数</th>
+                  <th class="col-md-3">注文ステータス</th>
+               </tr>
+            </thead>
+            <tbody>
+               <% @orders.each do |orders| %>
+               <tr>
+                  <td class = "pt-3 h4 text-center"><%= link_to orders.created_at.strftime("%Y-%m-%d %H:%M:%S"), admin_order_path(orders.id) %></td>
+                  <td class = "pt-3 h4 text-center"><%= orders.customer.last_name + orders.customer.first_name %></td>
+                  <td class = "pt-3 h4 text-center"><%= orders.order_items.sum(:quantity) %></td>
+                  <td class = "pt-3 h4 text-center"><%= orders.order_status_i18n %></td>
+               </tr>
+               <% end %>
+            </tbody>
+         </table>
+         <div class = "col-md-12 mt-5 h4 text-center"><%= paginate @orders %></div>
+      </div>
+   </div>

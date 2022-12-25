@@ -1,4 +1,5 @@
 class Public::CustomersController < ApplicationController
+  
   def show
     @customer = current_customer
   end
@@ -10,7 +11,8 @@ class Public::CustomersController < ApplicationController
   def update
     @customer = current_customer
     @customer.update(customer_params)
-    redirect_to customers_mypage_path(current_customer)
+    flash[:notice] = "更新しました"
+    redirect_to customers_mypage_path
   end
 
   def unsubscribe
@@ -19,8 +21,9 @@ class Public::CustomersController < ApplicationController
 
   def withdraw
     @customer = current_customer
-    @user.update(is_deleted: true)
+    @customer.update(is_deleted: true)
     reset_session
+    flash[:notice] = "退会しました"
     redirect_to root_path
   end
 end
