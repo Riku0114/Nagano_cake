@@ -30,7 +30,7 @@
                <% end %>
             </tbody>
          </table>
-         <p class = "col-md-8 mt-5 h5"><%= link_to "買い物を続ける", items_path %></p>
+         <p class = "col-md-8 mt-5 h5"><%= link_to "買い物を続ける", root_path %></p>
          <table class="col-md-4 table table-bordered">
             <thead>
                <% @cart_items.each do |cart_item| %>
@@ -49,7 +49,9 @@
             </thead>
          </table>
          <div class = "col-md-12 mt-5 h4 text-center">
+            <% if @cart_items.any? %>
             <%= link_to "情報入力に進む", orders_new_path %>
+            <% end %>
          </div>
       </div>
    </div>
